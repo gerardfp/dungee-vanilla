@@ -2,21 +2,16 @@
 <meta charset="UTF-8"/>
 <title>Dungee</title>
 
-<nav>
-    <a href="start">Start a new Dungee</a>
-    <a href="play">Play an existing Dungee</a>    
-</nav>
-
 
 <div id="apuntarseScreen" class="fragment">
     <h1>PLAY</h1>
-    <input id="pinEl" placeholder="PIN"/>
+    <input id="pinEl" placeholder="Enter game PIN"/>
     <input id="nomEl" placeholder="Your name"/>
-    <button id="joinButton">JOIN</button>
+    <a id="joinButton" href="#">JOIN</a>
 </div>
 
 <div id="waitingScreen" class="fragment">
-    <p aria-label="Loading">ESPERA A QUE EMPIECE</p>
+    <h1>ESPERA A QUE EMPIECE...</h1>
 </div>
 
 <div id="botonesScreen" class="fragment">
@@ -78,20 +73,19 @@
 
 
 <style>
+    @import url('https://fonts.googleapis.com/css2?family=Sigmar&display=swap');
     * {
-        border: 0;
         box-sizing: border-box;
-        margin: 0;
-        padding: 0;
     }
-    :root {
-        --bg: #e3e4e8;
-        --fg: #17181c;
-        --dur: 8s;
+    /* :root {
         font-size: calc(20px + (30 - 20) * (100vw - 320px) / (1280 - 320));
+    } */
+
+    html {
+        height: 100%;
     }
+
     body {
-        background: var(--bg);
         color: var(--fg);
         font: bold 1em/1.5 "Comfortaa", sans-serif;
         display: grid;
@@ -102,46 +96,8 @@
         text-transform: uppercase;
     }
 
-    nav {
-        display: flex;
-        gap: 2em;
-        padding: 1.4em;
-        background-color: hsl(138, 94%, 14%);
-        box-shadow: 2px 2px 12px Xrgb(3, 3, 3);
-        transition: background-color 3s;
-    }
-
-    nav span.separador {
-        width: 1px;
-        background: linear-gradient(#ffffff00, rgb(190, 190, 190), #ffffff00);
-    }
-
-    nav a {
-        color: white;
-        text-decoration: none;
-        border-radius: 8px;
-        padding: 0.8em;
-        display: flex;
-    }
-
-    nav a:hover {
-        background-color: hsl(138, 94%, 34%);
-        transition: background-color 0.6s;
-    }
-
-    section a {
-        color: white;
-        text-decoration: none;
-        border-radius: 16px;
-        padding: 0.8em;
-        display: flex;
-        background: rgb(71, 40, 207);
-    }
-
     body{
         margin: 0;
-        background: linear-gradient(90deg, hsl(138, 94%, 14%),hsl(133, 71%, 69%));
-
         font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
         font-size: large;
         height: 100%;
@@ -149,33 +105,46 @@
         flex-direction: column;
     }
 
-    html {
-        height: 100%;
+    h1 {
+        font-family: 'Sigmar', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        color: orange;
     }
 
+    .fragment {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.4em;
+    }
+
+    #joinButton {
+        font-family: 'Sigmar', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        font-size: 2em;
+        background-color: blue;
+        color: white;
+        padding: 0.4em;
+        border: 0;
+        text-decoration: none;
+        border-top-left-radius: 3.2em;
+        border-top-right-radius: 3.6em;
+        border-bottom-left-radius: 3em;
+        border-bottom-right-radius: 4.4em;
+        box-shadow: 4px 6px 0px blueviolet;
+    }
+
+    #joinButton:hover {
+        background-color: rgb(0, 0, 204);
+    }
+
+    input {
+        padding: 0.4em;
+    }
     .buttons {
         justify-content: center;
         display: flex;
         gap: 2em;;
     }
 
-    section {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 5em;
-        height: 100%;
-
-    }
-
-    footer {
-        width: 100%;
-        color: white;
-        padding: 1em;
-        text-align: center;
-
-    }
 
     .oculto{
         display: none;

@@ -3,24 +3,13 @@
 
 <title>Dungee</title>
 
-<nav>
-    <a href="start">Start a new Dungee</a>
-    <a href="play">Play an existing Dungee</a>    
-</nav>
 <div class="screen">
-
-    <div id="createFragment" class="fragment">
-        <a id="generarPinButton" href="#">CREATE DUNGEE</a>
-    </div>
-
     <div id="pinFragment" class="fragment">
-        <p>PIN:</p>
         <p id="pinEl"></p>
-        <p>Players:</p>
+        <a id="startButton" href="#">START DUNGEE</a>
         <ul id="usersEl">
             <li>No players joined yet.</li>
         </ul>
-        <a id="startButton" href="#">START DUNGEE</a>
 
     </div>
 
@@ -32,26 +21,20 @@
 
 <script type="module">
 
-    import { fetchUsuarios, fetchPreguntas, updatePreguntaActual } from '/modules/db.js';
+    import { fetchUsuarios, fetchPreguntas, updatePreguntaActual, putQuestions } from '/modules/db.js';
     import { mostrar } from '/modules/ui.js';
 
+    putQuestions();
+
     let pin;
-    let obtenerUsuariosInterval;
 
     startButton.onclick = startGame;
-    generarPinButton.onclick = generarPIN;
 
-    mostrar("createFragment", "fragment");
-
-    function generarPIN(){
+    mostrar("pinFragment", "fragment");
         
-        mostrar("pinFragment", "fragment");
+    pinEl.innerText = pin = Math.floor(Math.random()*9000)+1000;
 
-        pin = Math.floor(Math.random()*9000)+1000;
-        pinEl.innerText = pin;
-
-        obtenerUsuariosInterval = setInterval(mostarListaUsuarios, 3000);
-    }
+    const obtenerUsuariosInterval = setInterval(mostarListaUsuarios, 3000);
 
     function mostarListaUsuarios(){
         
@@ -136,33 +119,10 @@
         align-items: center;
     }
 
-    nav {
-        display: flex;
-        gap: 2em;
-        padding: 0.4em;
-        background-color: #71717199;        
-        box-shadow: 2px 2px 12px Xrgb(3, 3, 3);
-        transition: background-color 1s;
-    }
-
-    nav a {
-        color: white;
-        text-decoration: none;
-        border-radius: 8px;
-        padding: 0.8em;
-        display: flex;
-    }
-
-    nav a:hover {
-        background-color: #bdbdbd99;
-        transition: background-color 0.3s;
-    }
-
     .screen {
         width: 100%;
         height: 100%;
         display: flex;
-        align-items: center;
         justify-content: center;
     }
 
@@ -171,6 +131,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        justify-content: flex-start;
     }
 
     .fragment a {
@@ -178,13 +139,18 @@
         font-size: 2em;
         background-color: blue;
         color: white;
-        padding: 1em;
+        padding: 0.4em;
         border: 0;
         text-decoration: none;
         border-top-left-radius: 3.2em;
         border-top-right-radius: 3.6em;
         border-bottom-left-radius: 3em;
         border-bottom-right-radius: 4.4em;
+        box-shadow: 4px 6px 0px blueviolet;
+    }
+
+    .fragment a:hover {
+        background-color: rgb(0, 0, 204);
     }
 
     .buttons {
@@ -195,7 +161,8 @@
 
     #pinEl {
         font-family: 'Sigmar', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-        font-size: 7em;
+        font-size: 6em;
+        padding: 0;
         margin: 0;
     }
 
