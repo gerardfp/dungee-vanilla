@@ -41,11 +41,12 @@
         fetchUsuarios(pin).then(json => {
             if (json == null) return;
 
-            let usersList = ""
+            // Don't do this at home!
+            let usersList = "";
             for (const x in json.users){
                 usersList += `<li>${json.users[x].name}`;
             }
-            usersEl.innerHTML = usersList
+            usersEl.innerHTML = usersList; 
         });
     }
 
@@ -55,6 +56,7 @@
         clearInterval(obtenerUsuariosInterval);
 
         fetchPreguntas().then(json => {
+            // Don't do this at home!
             let codiHTML = "";
             let i = 0;
             for ( const pregunta in json.preguntas){
@@ -105,14 +107,19 @@
 
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Sigmar&display=swap');
+    * {
+        box-sizing: border-box;
+    }
+
     html {
+        
         height: 100%;
     }
 
     body {
         margin: 0;
         font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-        font-size: large;
+        font-size: 2vw;
         height: 100%;
         display: flex;
         flex-direction: column;
@@ -136,45 +143,40 @@
 
     .fragment a {
         font-family: 'Sigmar', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-        font-size: 2em;
-        background-color: blue;
+        font-size: 3vw;
+        background-color: rgb(0, 89, 255);
         color: white;
-        padding: 0.4em;
+        padding: 1.4vw;
         border: 0;
         text-decoration: none;
-        border-top-left-radius: 3.2em;
-        border-top-right-radius: 3.6em;
-        border-bottom-left-radius: 3em;
-        border-bottom-right-radius: 4.4em;
-        box-shadow: 4px 6px 0px blueviolet;
+        border-top-left-radius: 3.2vw;
+        border-top-right-radius: 3.6vw;
+        border-bottom-left-radius: 3vw;
+        border-bottom-right-radius: 4.4vw;
+        box-shadow: 4px 6px 0px rgb(73, 122, 255);
     }
 
     .fragment a:hover {
         background-color: rgb(0, 0, 204);
     }
 
-    .buttons {
-        justify-content: center;
-        display: flex;
-        gap: 2em;;
-    }
-
     #pinEl {
         font-family: 'Sigmar', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-        font-size: 6em;
+        font-size: 12vw;
         padding: 0;
-        margin: 0;
+        margin-top: -4vw;
+        margin-bottom: -2vw;
     }
 
     #usersEl {
         color: white;
         padding: 1em;
         background: rgb(255, 19, 188);
-        border-top-left-radius: 3.2em;
-        border-top-right-radius: 3.6em;
-        border-bottom-left-radius: 3em;
-        border-bottom-right-radius: 4.4em;
-        width: 25em;
+        border-top-left-radius: 3.2vw;
+        border-top-right-radius: 3.6vw;
+        border-bottom-left-radius: 3vw;
+        border-bottom-right-radius: 4.4vw;
+        width: 50vw;
     }
 
     #usersEl li {
@@ -184,6 +186,7 @@
 
     #preguntasEl {
         width: 100%;
+        height: 100%;
     }
 
     #preguntasEl h1 {
@@ -191,24 +194,28 @@
     }
 
     .pregunta {
-        font-size: 4em;
+        font-size: 4vh;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
     }
 
     .pregunta ul {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 1rem;
+        gap: 2vw;
         padding: 0;
     }
 
     .pregunta li {
-        padding: 1em;
+        padding: 3.2vw;
         list-style-type: none;
         text-align: center;
     }
 
     .pregunta li:nth-child(1) {
-        background-color: rgb(28, 119, 255);
+        background-color: rgb(61, 139, 255);
     }
     .pregunta li:nth-child(2) {
         background-color: rgb(255, 49, 49);
@@ -221,7 +228,7 @@
     }
 
     #progress {
-        height: 8px;
+        height: 1.6vw;
         background-color: violet;
 
         margin-right: auto;
