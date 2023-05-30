@@ -26,12 +26,10 @@
 
 <script type="module">
 
-    import { addUser, fetchPreguntas, updatePreguntaActual, getPreguntaActual } from '/modules/db.js';
+    import { addUser, getPreguntaActual, updateResponse} from '/modules/db.js';
     import { mostrar } from '/modules/ui.js';
 
-    let pin;
-    let nom;
-    let preguntaActual;
+    let pin, nom, userid, preguntaActual;
 
     joinButton.onclick = apuntarse;
     aButton.onclick = () => { responder('a') };
@@ -46,7 +44,7 @@
         pin = pinEl.value;
         nom = nomEl.value;
 
-        addUser(pin, nom);
+        addUser(pin, nom).then(user => userid = user.name);
 
         mostrar("waitingScreen", "fragment");
 
@@ -57,6 +55,9 @@
         setInterval(()=>{
             getPreguntaActual(pin).then(json => {
                 if (json != null) {
+                    if (json.value != preguntaActual) {
+                        activarBotones(true);
+                    }
                     preguntaActual = json.value;
                     mostrar("botonesScreen", "fragment");
                 }
@@ -64,8 +65,18 @@
         },1000);
     }
 
+    function activarBotones(bool){
+        aButton.disabled = !bool;
+        bButton.disabled = !bool;
+        cButton.disabled = !bool;
+        dButton.disabled = !bool;
+    }
+
     function responder(respuesta){
         console.log(`${preguntaActual} responde: ${respuesta}`);
+        activarBotones(false);
+        updateResponse(pin, userid, preguntaActual, respuesta);
+
     }
 
 </script>
