@@ -18,15 +18,23 @@ export function updatePreguntaActual(i, pin){
 }
 
 export function addUser(pin, nom){
-    fetch (`${dburl}/pins/pin${pin}/users.json`, {
+    return fetch (`${dburl}/pins/pin${pin}/users.json`, {
         method: 'POST',
         body: `{"name": "${nom}" }`
-    });
+    })
+    .then(data => data.json());
 }
 
 export function getPreguntaActual(pin){
     return fetch(`${dburl}/pins/pin${pin}/pregunta.json`)
         .then(data => data.json())
+}
+
+export function updateResponse(pin, userid, question, response) {
+    fetch(`${dburl}/pins/pin${pin}/users/${userid}/pregunta${question}.json`, {
+        method: "PUT",
+        body: `{ "value": "${response}"}`
+    })
 }
 
 
@@ -36,35 +44,35 @@ export function putQuestions(){
         body: JSON.stringify({
             "preguntas": {
                 "pregunta0" : {
-                    "pregunta": "2+2?",
-                    "respuesta0": "4",
-                    "respuesta1": "5",
-                    "respuesta2": "2",
-                    "respuesta3": "1",
-                    "correcta": "a"
+                    "pregunta": "Qué tipo de datos retorna el método next() de la clase Scanner?",
+                    "respuesta0": "char",
+                    "respuesta1": "String",
+                    "respuesta2": "char[]",
+                    "respuesta3": "El método next() no existe",
+                    "correcta": "b"
                 },
                 "pregunta1" : {
-                    "pregunta": "2+7?",
-                    "respuesta0": "4",
-                    "respuesta1": "5",
-                    "respuesta2": "9",
-                    "respuesta3": "1",
-                    "correcta": "c"
+                    "pregunta": "Qué tipo de datos retorna el método nextInt() de la clase Scanner?",
+                    "respuesta0": "int",
+                    "respuesta1": "Integer",
+                    "respuesta2": "number",
+                    "respuesta3": "Number",
+                    "correcta": "a"
                 },
                 "pregunta2" : {
-                    "pregunta": "2+1?",
-                    "respuesta0": "4",
-                    "respuesta1": "3",
-                    "respuesta2": "2",
-                    "respuesta3": "1",
-                    "correcta": "d"
+                    "pregunta": "Qué tipo de datos retorna el método nextString() de la clase Scanner?",
+                    "respuesta0": "Unicode",
+                    "respuesta1": "String",
+                    "respuesta2": "El método nextString() no existe",
+                    "respuesta3": "char[]",
+                    "correcta": "c"
                 },
                 "pregunta3" : {
-                    "pregunta": "20+10?",
-                    "respuesta0": "40",
-                    "respuesta1": "10",
-                    "respuesta2": "20",
-                    "respuesta3": "30",
+                    "pregunta": "Qué tipo de datos retorna el método hasNext() de la clase Scanner?",
+                    "respuesta0": "char",
+                    "respuesta1": "String",
+                    "respuesta2": "int",
+                    "respuesta3": "boolean",
                     "correcta": "d"
                 }
             }
