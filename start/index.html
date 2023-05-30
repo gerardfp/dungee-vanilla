@@ -26,7 +26,7 @@
 
     putQuestions();
 
-    let pin;
+    let pin, questions;
 
     startButton.onclick = startGame;
 
@@ -56,6 +56,7 @@
         clearInterval(obtenerUsuariosInterval);
 
         fetchPreguntas().then(json => {
+            questions = json.preguntas;
             // Don't do this at home!
             let codiHTML = "";
             let i = 0;
@@ -94,10 +95,22 @@
             updatePreguntaActual(i, pin);
             
             if(i == cantidad){
-                clearInterval(mostrarPregsInterval)
+                updatePreguntaActual(-1, pin); // -1 == fin 
+                clearInterval(mostrarPregsInterval);
+                mostrarPodium();
             }
 
         }, 4500);  
+    }
+
+    function mostrarPodium(){
+        const responses = fetchUsuarios(pin);
+
+        for (const user of responses) {
+            for (const question of questions) {
+                if (responses[user][question].value === questions[question].correcta)
+            }
+        }
     }
 </script> 
 
